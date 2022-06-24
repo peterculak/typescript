@@ -47,6 +47,7 @@ interface Database<T extends BaseRecord> {
   get(id: string): T
   onBeforeAdd(listener: Listener<BeforeSetEvent<T>>): () => void;
   onAfterAdd(listener: Listener<AfterSetEvent<T>>): () => void;
+  onAfterGet(listener: Listener<GetRecordEvent<T>>): () => void;
 }
 
 class InMemoryDatabase<T extends BaseRecord> implements Database<T> {
@@ -120,3 +121,22 @@ pokemonDB.set({
 });
 
 const trex = pokemonDB.get('TRex');
+
+function findPeakElement(nums: number[]): number {
+    
+  let l = 0;
+  let r = nums.length -1;
+  while (l<r) {
+      let mid = Math.floor((l+r)/2);
+      if (nums[mid] > nums[mid+1]) {
+          r = mid;
+      } else  {
+          l = mid + 1;
+      }
+  }
+  return l;
+};
+
+
+const r = findPeakElement([1,2,3,1]);
+console.log([1,2,3,1], r);
